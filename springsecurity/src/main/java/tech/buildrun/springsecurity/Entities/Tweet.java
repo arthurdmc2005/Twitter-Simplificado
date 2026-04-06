@@ -6,7 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.Instant;
 
 @Entity
-@Table(name = "tb_tweet")
+@Table(name = "tb_tweets")
 public class Tweet {
 
     @Id
@@ -14,8 +14,10 @@ public class Tweet {
     @Column(name = "tweet_id")
     private Long tweetId;
 
-    @Column(unique = true)
-    private User username;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     private String content;
 
@@ -31,11 +33,11 @@ public class Tweet {
     }
 
     public User getUsername() {
-        return username;
+        return user;
     }
 
     public void setUsername(User username) {
-        this.username = username;
+        this.user = user;
     }
 
     public String getContent() {
